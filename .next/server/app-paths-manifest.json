@@ -1,8 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/(dashboard)/(routes)/teacher/courses/page": "app/(dashboard)/(routes)/teacher/courses/page.js",
-  "/(dashboard)/(routes)/page": "app/(dashboard)/(routes)/page.js",
   "/(auth)/(routes)/sign-in/[[...sign-in]]/page": "app/(auth)/(routes)/sign-in/[[...sign-in]]/page.js",
-  "/(dashboard)/(routes)/teacher/analytics/page": "app/(dashboard)/(routes)/teacher/analytics/page.js"
+  "/(dashboard)/(routes)/page": "app/(dashboard)/(routes)/page.js",
+  "/(dashboard)/(routes)/teacher/analytics/page": "app/(dashboard)/(routes)/teacher/analytics/page.js",
+  "/(dashboard)/(routes)/teacher/courses/page": "app/(dashboard)/(routes)/teacher/courses/page.js"
 }
