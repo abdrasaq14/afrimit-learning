@@ -1,6 +1,4 @@
-
+import { Button } from "@/components/ui/button";
 export default function CoursePage() {
-  return (
-    <div>Course page</div>
-  )
+  return <div>New Course</div>;
 }
