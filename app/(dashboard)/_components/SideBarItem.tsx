@@ -1,13 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 interface SideBarItemProps {
-  icon: LucideIcon;
-  label: string;
-  href: string;
+  icon: LucideIcon
+  label: string
+  href: string
 }
 
 const SideBarItem = ({ icon: Icon, label, href }: SideBarItemProps) => {
@@ -17,7 +17,7 @@ const SideBarItem = ({ icon: Icon, label, href }: SideBarItemProps) => {
     (pathname === "/" && href === "/") ||
     pathname?.startsWith(`${href}/`) ||
     pathname === href;
-  const onClick = () => router.push(href);
+  const onClick = () => { router.push(href); };
   return (
     <button
       onClick={onClick}
