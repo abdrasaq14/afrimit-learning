@@ -21,13 +21,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 const formSchema = z.object({
-  title: z.string().min(3, { message: "Title is too short" })
+  title: z.string().min(3, { message: "Title is too short" }),
+  author: z.string().min(3, { message: "Author is too short" })
 });
 const CreateCoursePage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: ""
+      title: "",
+      author: ""
     }
   });
   const router = useRouter();
@@ -50,6 +52,19 @@ const CreateCoursePage = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
             <FormField control={form.control}
               name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor={field.name}>Course Title</FormLabel>
+                  <FormControl>
+                    <Input disabled={isSubmitting} placeholder="e.g 'Advanced Web Development'" {...field} />
+                  </FormControl>
+                  <FormDescription>What will you teach in this course</FormDescription>
+                  <FormMessage>{form.formState.errors.title?.message}</FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField control={form.control}
+              name="author"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel htmlFor={field.name}>Course Title</FormLabel>
