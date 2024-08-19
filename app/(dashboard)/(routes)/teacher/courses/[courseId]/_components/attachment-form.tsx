@@ -34,7 +34,7 @@ export const CourseAttachmentForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}`, values);
+      await axios.post(`/api/courses/${courseId}/attachments`, values);
       toast.success("Course title updated");
       toggleEditing();
       router.refresh();
@@ -61,7 +61,7 @@ export const CourseAttachmentForm = ({
       {isEditing ? (
         <div className="">
           <FileUpload
-            endpoint="courseImage"
+            endpoint="courseAttachment"
             onChange={(url) => {
               if (url) {
                 onSubmit({ url });
@@ -69,21 +69,12 @@ export const CourseAttachmentForm = ({
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            16:9 aspect ratio recommended
+            Add anything your student might need to complete the course
           </div>
         </div>
-      ) : !initialData.attachments.length ? (
+      ) : !initialData.attachments.length && (
         <p className="text-sm mt-2 text-slate-500 italic">No attachments yet</p>
-      ) : (
-        <div className="relative aspect-video mt-12">
-          <Image
-            alt="Upload"
-            fill
-            className="object-cover rounded-md"
-            src={initialData.imageUrl}
-          />
-        </div>
-      )}
+      ) }
     </div>
   );
 };
