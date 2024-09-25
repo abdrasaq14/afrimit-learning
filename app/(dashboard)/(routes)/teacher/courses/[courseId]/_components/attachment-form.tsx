@@ -3,16 +3,13 @@
 "use client";
 import * as z from "zod";
 import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { File, Loader2, Pencil, X, } from "lucide-react";
 import type { Course, Attachment } from "@prisma/client";
-import Image from "next/image";
 import { FileUpload } from "@/components/file-upload";
 
 interface AttachmentFormProps {
@@ -27,6 +24,7 @@ export const CourseAttachmentForm = ({
   courseId
 }: AttachmentFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [deleteingId, setDeleteingId] = useState<string | null>(null);
   const router = useRouter();
   const toggleEditing = () => {
     setIsEditing((prev) => !prev);
@@ -43,6 +41,20 @@ export const CourseAttachmentForm = ({
       console.error(error);
     }
   };
+
+  const onDelete = async (id: string) => { 
+    try {
+      setDeleteingId(id);
+      await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
+      toast.success("Attachment deleted");
+      router.refresh();
+    } catch (error) {
+      toast.error("something went wrong");
+      console.error(error);
+    } finally {
+      setDeleteingId(null);
+    }
+  }
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
@@ -74,7 +86,27 @@ export const CourseAttachmentForm = ({
         </div>
       ) : !initialData.attachments.length && (
         <p className="text-sm mt-2 text-slate-500 italic">No attachments yet</p>
-      ) }
+      )}
+        {initialData.attachments.length > 0 && (
+        <div className="space-y-2">
+          {initialData.attachments.map((attachment) => (
+            <div key={attachment.id} className="flex items-center p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md">
+              <File className="h-4 w-4 mr-2 flex-shrink-0" />
+              <p className="text-xs line-clamp-1">{attachment.name}</p>
+              {deleteingId === attachment.id && (
+                <div>
+                  <Loader2 className="h-4 w-4 animate-spin"/>
+                </div>
+              )}
+              {deleteingId !== attachment.id && (
+                <button className="ml-auto hover:opacity-75 transition">
+                  <X className="h-4 w-4"/>
+                </button>
+              )}
+          </div>
+        ))}
+        </div>
+        )}
     </div>
   );
 };

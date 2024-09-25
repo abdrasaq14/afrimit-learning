@@ -31,20 +31,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/(routes)/teacher/courses/page.js"
     ],
-    "/(dashboard)/(routes)/teacher/create/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(routes)/teacher/create/page.js"
-    ],
     "/(dashboard)/(routes)/teacher/courses/[courseId]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/(routes)/teacher/courses/[courseId]/page.js"
     ],
-    "/(dashboard)/(routes)/teacher/analytics/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(routes)/teacher/analytics/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
